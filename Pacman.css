@@ -1,0 +1,300 @@
+#gameMapContainer{
+	background-color:black;
+}
+.dotDiv, .magicPillDiv, .noDotDiv{
+	/*margin-left: 2px;
+    margin-top: 3px*/
+}
+#pacmanDiv{
+	background-color: yellow;
+	background-size: 18px auto;
+	height: 18px;
+	position: absolute;
+	width: 18px;
+	z-index: 1002;
+	background-image: url("assets/pacman/pacman-stationary-left.png");
+	display:block;
+}
+#pacmanContainer{
+	width: 420px;
+}
+#scoreDiv, #livesDiv{
+	color:white;
+	font-family:Arial;
+	font-size:1.2em;
+	display:inline-block;
+	text-align:left;
+	padding-left: 3px;
+	padding-right:4px;
+	float:right;
+	padding-top: 5px;
+}
+.statusIcon{
+	background-repeat: no-repeat;
+    background-size: 100% auto;
+    float: left;
+    height: 20px;
+    width: 20px;
+	margin-top:2px;
+}
+#livesIcon{
+	background-image: url("assets/pacman/pacman_25.png");
+}
+#scoreIcon{
+	background-image: url("assets/pacman/points_25.png");
+}
+#comments{
+	width:20%; 
+	margin:0 auto; 
+	height:100px; 
+	position:relative; 
+	color:white;
+}
+#pacmanDiv.up{
+	background-image: url("assets/pacman/pacman-animation1-up.gif");
+}
+#pacmanDiv.down{
+	background-image: url("assets/pacman/pacman-animation1-down.gif");
+}
+#pacmanDiv.right{
+	background-image: url("assets/pacman/pacman-animation1-right.gif");
+}
+#pacmanDiv.left{
+	background-image: url("assets/pacman/pacman-animation1-left.gif");
+}
+#pacmanDiv.dying{
+	background-image: url("assets/pacman/pacman-dying.gif");
+	background-color: black;
+	background-repeat: no-repeat;
+}
+#pacmanDiv.completed{
+	background-image: url("assets/pacman/pacman-completed.gif");
+}
+#pacmanDiv.stationary-left{
+	background-image: url("assets/pacman/pacman-stationary-left.png");
+}
+#pacmanDiv.stationary-right{
+	background-image: url("assets/pacman/pacman-stationary-right.png");
+}
+#pacmanDiv.stationary-down{
+	background-image: url("assets/pacman/pacman-stationary-down.png");
+}
+#pacmanDiv.stationary-up{
+	background-image: url("assets/pacman/pacman-stationary-up.png");
+}
+#pacmanDiv.invisible{
+	display:none;
+}
+.ghost{
+	width:18px;
+	height:18px;
+	position:absolute;
+	z-index:1001;
+	background-size:18px;
+	display:none;
+}
+#ghostRedDiv.up{
+	background-image: url("assets/pacman/ghost-up.gif");
+}
+#ghostRedDiv.right{
+	background-image: url("assets/pacman/ghost-right.gif");
+}
+#ghostRedDiv.left{
+	background-image: url("assets/pacman/ghost-left.gif");
+}
+#ghostRedDiv.down{
+	background-image: url("assets/pacman/ghost-down.gif");
+}
+#ghostRedDiv.evasive{
+	background-image: url("assets/pacman/ghost-scared.gif");
+}
+#ghostRedDiv.eaten{
+	background-color: black;
+    background-image: none;
+    color: white;
+    font-size: 10px;
+    text-align: right;
+}
+#ghostRedDiv.invisible{
+	display:none;
+}
+#ghostRedDiv.homing{
+	background-image: url("assets/pacman/ghost-homing.png");
+}
+#ghostRedDiv.blinking{
+	background-image: url("assets/pacman/ghost-scared-changing.gif");
+}
+#ghostBlueDiv.up{
+	background-image: url("assets/pacman/ghost-aqua-up.gif");
+}
+#ghostBlueDiv.right{
+	background-image: url("assets/pacman/ghost-aqua-right.gif");
+}
+#ghostBlueDiv.left{
+	background-image: url("assets/pacman/ghost-aqua-left.gif");
+}
+#ghostBlueDiv.down{
+	background-image: url("assets/pacman/ghost-aqua-down.gif");
+}
+#ghostBlueDiv.evasive{
+	background-image: url("assets/pacman/ghost-scared.gif");
+}
+#ghostBlueDiv.homing{
+	background-image: url("assets/pacman/ghost-homing.png");
+}
+#ghostBlueDiv.eaten{
+	background-color: black;
+    background-image: none;
+    color: white;
+    font-size: 10px;
+    text-align: right;
+}
+#ghostBlueDiv.blinking{
+	background-image: url("assets/pacman/ghost-scared-changing.gif");
+}
+#ghostBlueDiv.invisible{
+	display:none;
+}
+#ghostOrangeDiv.up{
+	background-image: url("assets/pacman/ghost-orange-up.gif");
+}
+#ghostOrangeDiv.right{
+	background-image: url("assets/pacman/ghost-orange-right.gif");
+}
+#ghostOrangeDiv.left{
+	background-image: url("assets/pacman/ghost-orange-left.gif");
+}
+#ghostOrangeDiv.down{
+	background-image: url("assets/pacman/ghost-orange-down.gif");
+}
+#ghostOrangeDiv.evasive{
+	background-image: url("assets/pacman/ghost-scared.gif");
+}
+#ghostOrangeDiv.homing{
+	background-image: url("assets/pacman/ghost-homing.png");
+}
+#ghostOrangeDiv.eaten{
+	background-color: black;
+    background-image: none;
+    color: white;
+    font-size: 10px;
+    text-align: right;
+}
+#ghostOrangeDiv.blinking{
+	background-image: url("assets/pacman/ghost-scared-changing.gif");
+}
+#ghostOrangeDiv.invisible{
+	display:none;
+}
+#ghostPinkDiv.up{
+	background-image: url("assets/pacman/ghost-pink-up.gif");
+}
+#ghostPinkDiv.right{
+	background-image: url("assets/pacman/ghost-pink-right.gif");
+}
+#ghostPinkDiv.left{
+	background-image: url("assets/pacman/ghost-pink-left.gif");
+}
+#ghostPinkDiv.down{
+	background-image: url("assets/pacman/ghost-pink-down.gif");
+}
+#ghostPinkDiv.evasive{
+	background-image: url("assets/pacman/ghost-scared.gif");
+}
+#ghostPinkDiv.homing{
+	background-image: url("assets/pacman/ghost-homing.png");
+}
+#ghostPinkDiv.blinking{
+	background-image: url("assets/pacman/ghost-scared-changing.gif");
+}
+#ghostPinkDiv.eaten{
+	background-color: black;
+    background-image: none;
+    color: white;
+    font-size: 10px;
+    text-align: right;
+}
+#ghostPinkDiv.invisible{
+	display:none;
+}
+#topBorder{
+	background-color: grey;
+	height: 10px;
+	left: 100px;
+	position: absolute;
+	top: 50px;
+	width: 600px;
+}
+#leftBorder{
+	background-color: grey;
+	height: 700px;
+	left: 100px;
+	position: absolute;
+	top: 50px;
+	width: 10px;
+}
+#rightBorder{
+	background-color: grey;
+	height: 700px;
+	left: 700px;
+	position: absolute;
+	top: 50px;
+	width: 10px;
+}
+#bottomBorder{
+	background-color: grey;
+	height: 10px;
+	left: 100px;
+	position: absolute;
+	top: 750px;
+	width: 600px;
+}
+.dotDiv{
+	background: url("assets/pacman/dot.jpg") no-repeat center;
+}
+.magicPillDiv{
+	background: url("assets/pacman/magicpill.jpg") no-repeat center;
+}
+.ghostBoxDiv3{
+	background: url("assets/pacman/ghost-box-3.gif") no-repeat center;
+	background-size:60px;
+	width:70px;
+	height:30px;
+}
+.ghostBoxDiv2{
+	background: url("assets/pacman/ghost-box-2.gif") no-repeat center;
+	background-size:40px;
+}
+.ghostBoxDiv1{
+	background: url("assets/pacman/ghost-box-1.gif") no-repeat center;
+	background-size:20px;
+}
+.readyDiv{
+	color: yellow;
+	font-family: Courier;
+	font-style: italic;
+	font-weight: bold;
+	line-height: 35px;
+	text-align: left;
+	width: 89px;
+}
+.showReadyDiv{
+	position:absolute;
+	top:245px;
+	left:170px;
+	z-index:1000;
+	text-align:center;
+}
+#gameMapContainer{
+	clear:both;
+	position:relative;
+}
+#debug{
+	
+	height:20px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	background-color:white;
+	display:block;
+}
