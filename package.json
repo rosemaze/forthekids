@@ -1,0 +1,9 @@
+{
+  "name": "forthekids",
+  "version": "1.0.0",
+  "description": "For the kids",
+  "main": "index.js",
+  "repository": "https://github.com/rosemaze/forthekids.git",
+  "author": "Mei Lam",
+  "license": "MIT"
+}

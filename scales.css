@@ -58,6 +58,13 @@ body, #root, #bodyDiv{
 	padding:0;
 }
 
+
+.scaleRow div::before{
+	content: "";
+	display: block;
+	padding-top: 100%; 	
+}
+
 .scaleRow:not(.bgRulesDontApply) > div.scaleCol,
 .scaleRow:not(.bgRulesDontApply) > div.scaleCol > div.scaleCell, 
 .scaleRow:not(.bgRulesDontApply) > div.scaleCol > div.scaleCell div{
@@ -70,11 +77,15 @@ body, #root, #bodyDiv{
 	border:none;
 }
 
-
-.scaleRow div::before{
-	content: "";
-	display: block;
-	padding-top: 100%; 	
+div.scaleRow.bgRulesDontApply > div.scaleCellLeftHalf, div.scaleRow.bgRulesDontApply > div.scaleCellLeftHalf div {
+	border:none;
+	border-top-right-radius: 180%;
+	border-top-left-radius: 0;
+}
+div.scaleRow.bgRulesDontApply > div.scaleCellRightHalf, div.scaleRow.bgRulesDontApply > div.scaleCellRightHalf div {
+	border:none;
+	border-top-left-radius: 180%;
+	border-top-right-radius: 0;
 }
 
 .scaleCell, .scaleCell div{
@@ -104,10 +115,21 @@ body, #root, #bodyDiv{
 }
 
 /*Wave colours*/
-
-/*default colour*/
 .scaleCol {
-	background: radial-gradient(circle at center, #82c6c7 0, #82c6c7 11%, white 12%, white 13.5%, #82c6c7  14%, #17a6a2 23%, white 24%, white 25.5%, #17a6a2 26%, #17a6a2  35%, white 36%, white 37.5%, #17a6a2  38%, #2b7574 48%, white 49%, white 50.5%, #2b7574 52%, #073e41 61%, white 62%, white 63.5%, #073e41 64%, #073e41 75%);
+	background: radial-gradient(circle at center, #82c6c7 0, #82c6c7 11%, white 12%, white 13.5%, #82c6c7 14%, #17a6a2 23%, white 24%, white 25.5%, #17a6a2 26%, #17a6a2 35%, white 36%, white 37.5%, #17a6a2 38%, #2b7574 48%, white 49%, white 50.5%, #2b7574 52%, #073e41 61%, white 62%, white 63.5%, #073e41 64%, #073e41 75%);
+}
+
+.scaleColDarker {
+	background: radial-gradient(circle at center, #224948 0, #224948 11%, white 12%, white 13.5%, #224948 14%, #183739 23%, white 24%, white 25.5%, #183739 26%, #183739  35%, white 36%, white 37.5%, #183739 38%, #176468 48%, white 49%, white 50.5%, #176468 51%, #0c2526 61%, white 62%, white 63.5%, #0c2526 64%, #0c2526 75%);
+}
+.scaleColAqua{
+	background: radial-gradient(circle at center, #98e9fe 0, #98e9fe 11%, white 12%, white 13.5%, #98e9fe 14%, #4c9fd5 23%, white 24%, white 25.5%, #4c9fd5 26%, #4c9fd5 35%, white 36%, white 37.5%, #4c9fd5 38%, #285aa3 48%, white 49%, white 50.5%, #285aa3 52%, #162d61 61%, white 62%, white 63.5%, #162d61 64%, #162d61 75%);
+}
+.scaleColBlush{
+	background: radial-gradient(circle at center, #F6DFE7 0, #F6DFE7 11%, #faf2f3 12%, #faf2f3 13.5%, #F6DFE7 14%, #F0CAD5 23%, white 24%, white 25.5%, #F0CAD5 26%, #F0CAD5 35%, white 36%, white 37.5%, #F0CAD5 38%, #DEA5B4 48%, white 49%, white 50.5%, #DEA5B4 52%, #C17C8F 61%, white 62%, white 63.5%, #C17C8F 64%, #C17C8F 75%);
+}
+.scaleColGrey{
+	background: radial-gradient(circle at center, #ccd0db 0, #ccd0db 11%, #eceef2 12%, #eceef2 13.5%, #ccd0db 14%, #a9bcc2 23%, #eceef2 24%, #eceef2 25.5%, #a9bcc2 26%, #a9bcc2 35%, #eceef2 36%, #eceef2 37.5%, #a9bcc2 38%, #74849b 48%, #eceef2 49%, #eceef2 50.5%, #74849b 52%, #454358 61%, #eceef2 62%, #eceef2 63.5%, #454358 64%, #454358 75%);
 }
 
 div.scaleCellRightHalf, div.scaleCellRightHalf div{
@@ -125,153 +147,84 @@ div.scaleCellLeftHalf, div.scaleCellLeftHalf div{
 	background: radial-gradient(at -5%, #82c6c7 0, #82c6c7 11%, white 12%, white 13.5%, #82c6c7  14%, #17a6a2 23%, white 24%, white 25.5%, #17a6a2 26%, #17a6a2  35%, white 36%, white 37.5%, #17a6a2  38%, #2b7574 48%, white 49%, white 50.5%, #2b7574 52%, #073e41 61%, white 62%, white 63.5%, #073e41 64%, #073e41 75%);
 }
 
-.scaleColDarker > .scaleCol {
-	background: radial-gradient(circle at center, #224948 0, #224948 11%, white 12%, white 13.5%, #224948  14%, #183739 23%, white 24%, white 25.5%, #183739 26%, #183739  35%, white 36%, white 37.5%, #183739  38%, #176468 48%, white 49%, white 50.5%, #176468 52%, #0c2526 61%, white 62%, white 63.5%, #0c2526 64%, #0c2526 75%);
-	/*background: radial-gradient(circle at center, #17a6a2 0, #17a6a2 11%, #d3f3f3 12%, #d3f3f3 13.5%, #17a6a2  14%, #2b7574 23%, #d3f3f3 24%, #d3f3f3 25.5%, #2b7574 26%, #2b7574  35%, #d3f3f3 36%, #d3f3f3 37.5%, #2b7574  38%, #073e41 48%, #d3f3f3 49%, #d3f3f3 50.5%, #073e41 52%, #073e41 61%, #d3f3f3 62%, #d3f3f3 63.5%, #073e41 64%, #073e41 75%);*/
+/*css Grid action*/
+.scaleRow:nth-child(2){
+	margin-top:-12%;
+	margin-bottom:12%;
+}
+.scaleRow:nth-child(3){
+	margin-top:-24%;
+	margin-bottom:24%;
+}
+.scaleRow:nth-child(4){
+	margin-top:-36%;
+	margin-bottom:36%;
+}
+.scaleRow:nth-child(5){
+	margin-top:-48%;
+	margin-bottom:48%;
+}
+.scaleRow:nth-child(6){
+	margin-top:-60%;
+	margin-bottom:60%;
+}
+.scaleRow:nth-child(7){
+	margin-top:-72%;
+	margin-bottom:72%;
 }
 
-.scaleColDarkerFade > .scaleCol {
-	background: radial-gradient(circle at center, rgba(34, 73, 72, 0.1) 0, rgba(34, 73, 72, 0.2) 11%, rgba(1,1,1,0.3) 12%, rgba(1,1,1,0.3) 13.5%,  rgba(34, 73, 72, 0.3)  14%, rgba(24, 55, 57, 0.3) 23%, rgba(1,1,1,0.3) 24%, rgba(1,1,1,0.4) 25.5%, rgba(24, 55, 57, 0.4) 26%, #183739  35%, white 36%, white 37.5%, #183739  38%, #176468 48%, white 49%, white 50.5%, #176468 52%, #0c2526 61%, white 62%, white 63.5%, #0c2526 64%, #0c2526 75%);
-	/*background: radial-gradient(circle at center, #17a6a2 0, #17a6a2 11%, #d3f3f3 12%, #d3f3f3 13.5%, #17a6a2  14%, #2b7574 23%, #d3f3f3 24%, #d3f3f3 25.5%, #2b7574 26%, #2b7574  35%, #d3f3f3 36%, #d3f3f3 37.5%, #2b7574  38%, #073e41 48%, #d3f3f3 49%, #d3f3f3 50.5%, #073e41 52%, #073e41 61%, #d3f3f3 62%, #d3f3f3 63.5%, #073e41 64%, #073e41 75%);*/
+.scaleRegularRowGridContainer {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+	height:100%;
 }
 
-.scaleRow  > div.scaleCol.bgAqua{
-	background-color:#162d61;
-	border-color:#d5f5fd;
-}
-.scaleRow  > div.scaleCol.bgAqua > div, .scaleRow  > div.scaleCol.bgAqua > div > div {
-	background-color:#285aa3;
-	border-color:#d5f5fd;
-}
-.scaleRow  > div.scaleCol.bgAqua > div > div > div, .scaleRow > div.scaleCol.bgAqua > div > div > div > div {
-	background-color:#4c9fd5;
-	border-color:#d5f5fd;
-}
-.scaleRow > div.scaleCol.bgAqua > div > div > div > div > div, .scaleRow > div.scaleCol.bgAqua > div > div > div > div > div > div  {
-	background-color:#98e9fe;
-	border-color:#d5f5fd;
+.scaleHalfEndsRowGridContainer{
+	display: grid;
+	grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 0.5fr;
+	height:100%;
 }
 
-.scaleRow > div.scaleCol.bgBlush{
-	background-color:#C17C8F;
-	border-color:#faf2f3;
+#contentBackground{
+	height:200vh;
+	background-color:rgba(0,0,0,0);
+	margin-top: -91%; 
+	width:100%;
+	position: relative;
+	float:left;
 }
-.scaleRow > div.scaleCol.bgBlush > div, .scaleRow > div.scaleCol.bgBlush > div > div  {
-	background-color:#DEA5B4;
-	border-color:#faf2f3;
+#bottomWaveDarkMargin{
+	height:10%;
+	float:left;
+	width:100%;
+	background-image: -webkit-linear-gradient(top, rgba(7, 62, 65, 0) 0%, rgba(7, 62, 65, 0.6) 60%, rgba(7, 62, 65, 1) 100%);
+	position: relative;
+    z-index: 10;
 }
-.scaleRow > div.scaleCol.bgBlush > div > div > div, .scaleRow > div.scaleCol.bgBlush > div > div > div > div{
-	background-color:#F0CAD5;
-	border-color:#faf2f3;
-}
-.scaleRow > div.scaleCol.bgBlush > div > div > div > div > div , .scaleRow > div.scaleCol.bgBlush > div > div > div > div > div  > div{
-	background-color:#F6DFE7;
-	border-color:#faf2f3;
-}
-
-.scaleRow > div.scaleCol.bgGrey{
-	background-color:#454358;
-	border-color:#eceef2;
-}
-.scaleRow  > div.scaleCol.bgGrey > div, .scaleRow  > div.scaleCol.bgGrey > div > div {
-	background-color:#74849b;
-	border-color:#eceef2;
-}
-.scaleRow > div.scaleCol.bgGrey > div > div > div, .scaleRow > div.scaleCol.bgGrey > div > div > div > div {
-	background-color:#a9bcc2;
-	border-color:#eceef2;
-}
-.scaleRow > div.scaleCol.bgGrey > div > div > div > div > div, .scaleRow > div.scaleCol.bgGrey > div > div > div > div > div  > div{
-	background-color:#ccd0db;
-	border-color:#eceef2;
-}
-
-background: radial-gradient(circle at center, #82c6c7 0, #82c6c7 11%, white 12%, white 13.5%, #82c6c7  14%, #17a6a2 23%, white 24%, white 25.5%, #17a6a2 26%, #17a6a2  35%, white 36%, white 37.5%, #17a6a2  38%, #2b7574 48%, white 49%, white 50.5%, #2b7574 52%, #073e41 61%, white 62%, white 63.5%, #073e41 64%, #073e41 75%);
-.bgDarkest{
-	z-index:10; /*over underwater bubbles*/
+#gradientDisappearBubble{
+	height:140%;
+	background-image: -webkit-linear-gradient(top, rgba(7, 62, 65, 1) 25%, rgba(7, 62, 65, 0.7) 35%, rgba(12, 75, 109, 0.6) 50%, rgba(7, 65, 158, 0.4) 80%, rgba(7, 62, 65, 0) 100%);
 	position:relative;
-}
-.bgDarkest > div  > div{
-	/*background: -webkit-linear-gradient(top, #183739 0%, #183739 30%, #073e41 100%); */
-	background: -webkit-linear-gradient(top, rgba(24, 55, 57, 1) 0%, rgba(24, 55, 57, 0.7) 30%, rgba(7, 62, 65, 0) 100%); 
-	background: radial-gradient(circle at center, #224948 0, #224948 11%, white 12%, white 13.5%, #224948  14%, #183739 23%, white 24%, white 25.5%, #183739 26%, #183739  35%, white 36%, white 37.5%, #183739  38%, #176468 48%, white 49%, white 50.5%, #176468 52%, #0c2526 61%, white 62%, white 63.5%, #0c2526 64%, #0c2526 75%);
-	
-	background-color:transparent;
-}
-.bgDarkest > div  > div  > div > div, .bgDarkest > div > div > div > div > div > div{
-	background: -webkit-linear-gradient(top, rgba(12, 37, 38, 1) 0%, rgba(34, 73, 72, 0.8) 20%, rgba(7, 62, 65, 0) 100%);
-	background-color:transparent;
-}
-.bgDarkest > div  > div > div > div > div > div > div > div, .bgDarkest > div > div > div > div > div > div > div > div > div > div{
-	/*background: -webkit-linear-gradient(top, #224948 0%, #224948 20%, #073e41 100%);*/
-	background: -webkit-linear-gradient(top, rgba(34, 73, 72, 1) 0%, rgba(34, 73, 72, 0.8) 20%, rgba(7, 62, 65, 0) 100%);
-	background-color:transparent;
-}
-.bgDarkest > div > div > div > div > div > div > div > div > div > div > div > div, .bgDarkest > div > div > div > div > div > div > div > div > div > div > div > div > div > div{
-	/*background: -webkit-linear-gradient(#224948, #073e41)*/
-	background: -webkit-linear-gradient(rgba(34, 73, 72, 1) 0%, rgba(7, 62, 65, 0) 100%);
-	background-color:transparent;
-}
-.bgDarkest div{
-	border:none;
-}
-.bgDarkest div.fakeBorder{
-	background: -webkit-linear-gradient(top, rgba(114, 178, 178, 1) 0%, rgba(23, 100, 104, 0.9) 10%, rgba(7, 62, 65, 0) 100%);
-	background-color:transparent;
-	border-radius:100%;
-}
-.bgDarkest > div > div > div > div  > div > div > div.fakeBorder, .bgDarkest > div > div > div > div  > div > div > div > div > div.fakeBorder{
-	/*background: -webkit-linear-gradient(top, #176468 0%, #176468 10%, #073e41 100%);*/
-	background: -webkit-linear-gradient(top, rgba(23, 100, 104, 1) 0%, rgba(23, 100, 104, 0.9) 10%, rgba(7, 62, 65, 0) 100%);
-	background-color:transparent;
-}
-.bgDarkest > div > div > div > div  > div > div > div > div > div > div > div.fakeBorder, .bgDarkest > div > div > div > div  > div > div > div > div > div > div > div > div > div.fakeBorder{
-	/*background: -webkit-linear-gradient(top, #176468 0%, #073e41 10%, #073e41 100%);*/
-	background: -webkit-linear-gradient(top, rgba(23, 100, 104, 1) 0%, rgba(7, 62, 65, 0.9) 10%,  rgba(7, 62, 65, 0) 100% );
-	background-color:transparent;
-}
-.bgDarkest div.fakeBorder > div{
-	top: 4px;
-	right: 4px;
-	bottom: 4px;
-	left: 4px;
-	border-radius:100%;
+	z-index:10;
+	float:left;
+	width:100%;
 }
 
-.overlap>div{
-	margin-top:-12.8%;
-}
+/*css Grid action*/
 
-div.scaleRow.bgRulesDontApply > div.scaleCellLeftHalf, div.scaleRow.bgRulesDontApply > div.scaleCellLeftHalf div {
-	border:none;
-	border-top-right-radius: 180%;
-	border-top-left-radius: 0;
-}
-div.scaleRow.bgRulesDontApply > div.scaleCellRightHalf, div.scaleRow.bgRulesDontApply > div.scaleCellRightHalf div {
-	border:none;
-	border-top-left-radius: 180%;
-	border-top-right-radius: 0;
-}
-
+/*
 div.scaleCellLeftHalf::before, 
 div.scaleCellRightHalf::before {
     padding-top: 200%;
-}
+}*/
 
 .scaleCol:not(.noAnimation):hover{
-	border:2px solid blue !important;
+	border:2px solid #82c6c7 !important;
 	cursor:pointer;
 }
 .scaleCol.noAnimation:hover{
-	border:2px solid red !important;
-	background-color:green;
+	border:2px solid blue !important;
 }
-
-.scaleCol.noAnimation:hover div{
-	border:2px solid red !important;
-	background-color:green;
-}
-
 
 .shortcutSpan .shortcutDiv{
 	background-repeat: no-repeat;
@@ -279,12 +232,11 @@ div.scaleCellRightHalf::before {
     border: medium none;
     padding: 0;
     position: absolute;
-	background-color: rgba(0, 0, 0, 0);
 }
 #shortcutPacmanDiv{
 	transform: rotate(-30deg);
-	left: -5px;
-    top: 10px;
+	left: -10%;
+    top: 13%;
 }
 #shortcutPacmanEye{
 	border-radius: 50%;
@@ -341,13 +293,13 @@ div.scaleCellRightHalf::before {
 }
 #chat-pacman{
 	position: absolute;
-    top: -12%;
-    right: -10px;
+    top: -22%;
+    right: -23%;
     opacity: 0;
 }
 #chat-pacman.chatBubbleContainer::after{
 	border-color: transparent floralwhite floralwhite transparent;
-    top: 72%;
+    /*top: 42%;*/
 }
 #shortcutCupcakeDiv{
 	background-image:url("assets/waves/cupcake.png");
@@ -519,31 +471,7 @@ div.scaleCellRightHalf::before {
     border-radius: 100% 47%;
 }
 
-#contentBackground{
-	height:200vh;
-	background-color:rgba(0,0,0,0);
-	margin-top: -17%; 
-	width:100%;
-	position: relative;
-	float:left;
-}
-#bottomWaveDarkMargin{
-	height:10%;
-	float:left;
-	width:100%;
-	/*background-image: -webkit-linear-gradient(top, rgba(0,22,22,0) 0%, rgba(0,22,22,0.8) 60%, rgba(0,22,22,1) 100%); */
-	background-image: -webkit-linear-gradient(top, rgba(7, 62, 65, 0) 0%, rgba(7, 62, 65, 0.6) 60%, rgba(7, 62, 65, 1) 100%);
-	position: relative;
-    z-index: 10;
-}
-#gradientDisappearBubble{
-	height:140%;
-	background-image: -webkit-linear-gradient(top, rgba(7, 62, 65, 1) 25%, rgba(7, 62, 65, 0.7) 35%, rgba(12, 75, 109, 0.6) 50%, rgba(7, 65, 158, 0.4) 80%, rgba(7, 62, 65, 0) 100%);
-	position:relative;
-	z-index:10;
-	float:left;
-	width:100%;
-}
+
 /*background-image: -webkit-linear-gradient(top, rgba(0,22,22,1) 0%, rgba(0,22,22,1) 10%, rgba(0,17,17,0.8) 80%, rgba(0,17,17,0) 100%); */
 
 .mainDescContainer{
@@ -728,8 +656,8 @@ h3{
     background-color: floralwhite;
     width: 140px;
     border-radius: 10px;
-    margin-left: 57%;
-    margin-top: 8%;
+    margin-left: 60%;
+    margin-top: 5%;
     height: 100px;
 	opacity: 0;
 }
@@ -999,30 +927,34 @@ h3{
 
 .chatBubbleImg:nth-of-type(1) {
   background-image:url("assets/waves/logoBootstrap100.png");
-  animation-delay: 12s;
+  animation-delay: 14s;
 }
 .chatBubbleImg:nth-of-type(2) {
   background-image:url("assets/waves/logoNodeJs100.png");
-  animation-delay: 10s;
+  animation-delay: 12s;
 }
 .chatBubbleImg:nth-of-type(3) {
   background-image:url("assets/waves/logoHTML5100.png");
-  animation-delay: 8s;
+  animation-delay: 10s;
 }
 .chatBubbleImg:nth-of-type(4) {
   background-image:url("assets/waves/logoCSS3100.png");
-  animation-delay: 6s;
+  animation-delay: 8s;
 }
 .chatBubbleImg:nth-of-type(5) {
   background-image:url("assets/waves/logoJS100.png");
-  animation-delay: 4s;
+  animation-delay: 6s;
 }
 .chatBubbleImg:nth-of-type(6) {
   background-image:url("assets/waves/logoReact100.png");
-  animation-delay: 2s;
+  animation-delay: 4s;
 }
 .chatBubbleImg:nth-of-type(7) {
   background-image:url("assets/waves/logo_jQuery.png");
+  animation-delay: 2s;
+}
+.chatBubbleImg:nth-of-type(8) {
+  background-image:url("assets/waves/logo_Redux.png");
   animation-delay: 0s;
 }
 
@@ -1086,10 +1018,7 @@ h3{
 	.overlap>div{
 		margin-top: -24%;
 	}
-	/*
-	.scaleRow div{
-		border:3px solid floralwhite;
-	}*/
+	
 	.scaleRow:not(.bgRulesDontApply) > div.scaleCol, 
 	.scaleRow:not(.bgRulesDontApply) > div.scaleCol > div.scaleCell, 
 	.scaleRow:not(.bgRulesDontApply) > div.scaleCol > div.scaleCell div{
@@ -1152,11 +1081,6 @@ h3{
 	.scaleRow > div > div > div > div > div > div{
 		display:none;
 	}
-	/*
-	.scaleRow div{
-		border:2px solid floralwhite;
-		padding:7px;
-	}*/
 	.scaleRow:not(.bgRulesDontApply) > div.scaleCol, 
 	.scaleRow:not(.bgRulesDontApply) > div.scaleCol > div.scaleCell, 
 	.scaleRow:not(.bgRulesDontApply) > div.scaleCol > div.scaleCell div{

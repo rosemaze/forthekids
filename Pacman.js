@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './Pacman_Jquery.css';
-import DocumentEvents from 'react-document-events';
 import { kickStartJqueryPacmanGame, removeJqueryPacmanEventListeners, kickStartJqueryPacmanGameWithBehaviour } from './Pacman_Jquery';
 import { DropdownButton, MenuItem, Button, ButtonGroup, Glyphicon, Dropdown } from 'react-bootstrap';
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './App.css';
 import './bootstrap.css';
 import './bootstrap-theme.css';
@@ -6,17 +7,18 @@ import './scales.css';
 import './bubbles.css';
 import PacmanApp from './Pacman';
 
+import { Grid } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
-import { Grid } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { Navbar, Nav, NavItem, MenuItem, NavDropdown } from 'react-bootstrap';
 import { kickStartAnimateScales, detectScrollPosition } from './parallax';
 
-var ScrollWrapper = React.createClass({
+var createReactClass = require('create-react-class');
+var ScrollWrapper = createReactClass({
     propTypes: {
-        onWindowScroll: React.PropTypes.func
+        onWindowScroll: PropTypes.func
     },
 
     handleScroll: function(event) {
@@ -46,10 +48,10 @@ var ScrollWrapper = React.createClass({
     }
 });
 
-const CELL_GREY = 'bgGrey';
+const CELL_GREY = 'scaleColGrey';
 const CELL_GREY_NO_ANIM = 'bgGrey noAnimation';
-const CELL_BLUSH = 'bgBlush';
-const CELL_AQUA = 'bgAqua';
+const CELL_BLUSH = 'scaleColBlush';
+const CELL_AQUA = 'scaleColAqua';
 const CELL_NO_ANIM = 'noAnimation';
 
 const PacmanCell = (props) => {
@@ -57,10 +59,12 @@ const PacmanCell = (props) => {
 }
 
 const RegularCell = (props) => {
+	let scaleColColor = (props.darker) ? 'scaleColDarker' : 'scaleColGreen';
+	scaleColColor = (props.cssColor && props.cssColor!=='') ? props.cssColor : scaleColColor;
 	const scaleColClass = 'scaleCol' + props.row;
-	const cssColorClass = (props.cssColor && props.cssColor!=='') ? ' ' + props.cssColor : '';
+	
 	return (
-		<Col md={2} xs={4} id={"scaleCol"+props.row+"_"+props.col} className={"scaleCol " + scaleColClass + cssColorClass} >{props.children}</Col>
+		<div id={"scaleCol"+props.row+"_"+props.col} className={`scaleCol ${scaleColColor} ${scaleColClass}`} >{props.children}</div>
 	);
 }
 
@@ -70,30 +74,30 @@ const HalfEndCell = (props) => {
 	[sideClass, col] = (props.side==='right') ? ['scaleCellRightHalf', 7] : ['scaleCellLeftHalf', 1];
 	
 	return (
-		<Col md={1} xs={2} id={"scaleCol"+props.row+"_"+col} className={sideClass + " " + scaleColClass} ></Col>
+		<div id={"scaleCol"+props.row+"_"+col} className={sideClass + " " + scaleColClass} ></div>
 	);
 }
 
 const RegularRow = (props) => {
-	const overlapClass = (props.row > 2) ? ' overlap' : '';
-	const lightDarkClass = (props.darker) ? ' scaleColDarker' : '';
+	const overlapClass = (props.row > 2) ? 'overlap' : '';
+	const className = `scaleRow ${overlapClass} scaleRegularRowGridContainer`;
 	return(
-		<Row className="show-grid" bsClass={"scaleRow"+overlapClass+lightDarkClass}>
-			<RegularCell cssColor={props.ColColors[0]} row={props.row} col={1} />
-			<RegularCell cssColor={props.ColColors[1]} row={props.row} col={2} />
-			<RegularCell cssColor={props.ColColors[2]} row={props.row} col={3}></RegularCell>
-			<RegularCell cssColor={props.ColColors[3]} row={props.row} col={4} />
-			<RegularCell cssColor={props.ColColors[4]} row={props.row} col={5} />
-			<RegularCell cssColor={props.ColColors[5]} row={props.row} col={6} />
-		</Row>
+		<div className={className} bsClass={"scaleRow"+overlapClass}>
+			<RegularCell cssColor={props.ColColors[0]} row={props.row} col={1} darker={props.darker}/>
+			<RegularCell cssColor={props.ColColors[1]} row={props.row} col={2} darker={props.darker}/>
+			<RegularCell cssColor={props.ColColors[2]} row={props.row} col={3} darker={props.darker}></RegularCell>
+			<RegularCell cssColor={props.ColColors[3]} row={props.row} col={4} darker={props.darker}/>
+			<RegularCell cssColor={props.ColColors[4]} row={props.row} col={5} darker={props.darker}/>
+			<RegularCell cssColor={props.ColColors[5]} row={props.row} col={6} darker={props.darker}/>
+		</div>
 	)
 }
 
 const HalfEndsRow = (props) => {
 	const specialClass = (props.specialClass) ? ' '+props.specialClass : '';
 	return (
-		<Row className="show-grid" bsClass={"scaleRow altColour overlap"+specialClass}>
-			<HalfEndCell md={1} row={props.row} side='left' />
+		<div className="scaleRow overlap scaleHalfEndsRowGridContainer" bsClass={"scaleRow altColour overlap"+specialClass}>
+			<HalfEndCell row={props.row} side='left' />
 			<RegularCell cssColor={props.ColColors[1]} row={props.row} col={2} />
 			<RegularCell cssColor={props.ColColors[2]} row={props.row} col={3}>
 				{props.handlePacmanClick && <PacmanCell handleClick={props.handlePacmanClick}/>}
@@ -101,8 +105,8 @@ const HalfEndsRow = (props) => {
 			<RegularCell cssColor={props.ColColors[3]} row={props.row} col={4} />
 			<RegularCell cssColor={props.ColColors[4]} row={props.row} col={5} />
 			<RegularCell cssColor={props.ColColors[5]} row={props.row} col={6} />
-			<HalfEndCell md={1} row={props.row} side='right' />
-		</Row>
+			<HalfEndCell row={props.row} side='right' />
+		</div>
 	)
 }
 
@@ -153,33 +157,8 @@ class App extends Component {
 	}
 	
 	hidePacmanModal(){
-		if (confirm('Are you sure you want to leave this game?')){
+		if (window.confirm('Are you sure you want to leave this game?')){
 			this.setState({showPacmanModal: false});
-		}
-	}
-	
-	recursiveReturnInnerDiv(index){
-		//<div className="scaleCell">{ this.recursiveReturnInnerDiv(innerDivCount, true) };</div>
-		index--;
-		if (index<=0){
-			return '';
-		}
-		return <div>{this.recursiveReturnInnerDiv(index)}</div>;
-	}
-	recursiveReturnInnerDarkerDiv(index){
-		index--;
-		if (index<=0){
-			return <div className="fakeBorder"><div></div></div>;
-		}
-		return <div className="fakeBorder"><div>{this.recursiveReturnInnerDarkerDiv(index)}</div></div>;
-	}
-	
-	recursiveFibonacci(position){
-		if (position<=2){ 
-			return 1;
-		}else{
-			position--;
-			return this.recursiveFibonacci(position) + this.recursiveFibonacci(position-1);
 		}
 	}
 	
@@ -191,14 +170,14 @@ class App extends Component {
 				<Navbar inverse collapseOnSelect fixedTop className={this.state.navBarClass + ' navBar'}>
 					<Navbar.Header>
 						<Navbar.Brand>
-							<a href="#" id="btnHome">Maze Portfolio</a>
+							<a href="#" id="btnHome">For the Kids</a>
 						</Navbar.Brand>
 						<Navbar.Toggle />
 					</Navbar.Header>
 					<Navbar.Collapse>
 						<Nav onSelect={this.handleNavSelect}>
 							<NavItem eventKey={1} href="#">pacman</NavItem>
-							<NavDropdown eventKey={3} title="Technologies Implemented" id="basic-nav-dropdown">
+							<NavDropdown eventKey={3} title="Tech" id="basic-nav-dropdown">
 							<MenuItem eventKey={3.1}>Javascript</MenuItem>
 							<MenuItem eventKey={3.2}>&nbsp; React</MenuItem>
 							<MenuItem eventKey={3.3}>&nbsp; jQuery</MenuItem>
@@ -228,39 +207,14 @@ class App extends Component {
 					<div id="introBackground">
 						<div id="parallaxDarken"></div>
 						<div id="sky" />
-						<Grid fluid={true} className="scalesContainer">
+						<Grid fluid={true} className="scaleContainer">
 							<RegularRow row={1} ColColors={['', '', CELL_GREY, CELL_GREY, CELL_BLUSH, CELL_AQUA]} />
 							<HalfEndsRow row={2} ColColors={['', CELL_GREY, CELL_GREY_NO_ANIM, '', '', CELL_BLUSH, '']} handlePacmanClick={this.handlePacmanClick} />
 							<RegularRow row={3} ColColors={['', '', CELL_AQUA, '', CELL_NO_ANIM, '']} />
 							<HalfEndsRow row={4} ColColors={['', CELL_AQUA, CELL_AQUA, CELL_GREY, '', '', '']} />
 							<RegularRow row={5} ColColors={['', CELL_AQUA, '', '', CELL_GREY, '']} />
 							<HalfEndsRow row={6} ColColors={['', '', CELL_AQUA, CELL_AQUA, CELL_BLUSH, CELL_GREY, '']} />
-							<RegularRow row={7} ColColors={['', '', '', '', '', '']} specialClass='scaleColDarker'/>
-
-							<Row className="show-grid" bsClass="scaleRow bgRulesDontApply bgDarkest altColour overlap">
-								<Col md={1} xs={2} id="scaleCol8_1" className={"scaleCellLeftHalf scaleCol8 noAnimation"}><div className="scaleCell">
-									{ this.recursiveReturnInnerDiv(innerDivCount) };
-								</div></Col>
-								<Col md={2} xs={4} id="scaleCol8_2" className={"scaleCol8 noAnimation"}><div className="scaleCell">
-									{ this.recursiveReturnInnerDiv(innerDivCount) };
-								</div></Col>
-								<Col md={2} xs={4} id="scaleCol8_3" className={"scaleCol8 noAnimation"}><div className="scaleCell">
-									{ this.recursiveReturnInnerDiv(innerDivCount) };
-								</div></Col>
-								<Col md={2} xsHidden smHidden id="scaleCol8_4" className={"scaleCol8 noAnimation"}><div className="scaleCell">
-									{ this.recursiveReturnInnerDiv(innerDivCount) };
-								</div></Col>
-								<Col md={2} xsHidden smHidden id="scaleCol8_5" className={"scaleCol8 noAnimation"}><div className="scaleCell">
-									{ this.recursiveReturnInnerDiv(innerDivCount) };
-								</div></Col>
-								<Col md={2} xsHidden smHidden id="scaleCol8_6" className={"scaleCol8 noAnimation"}><div className="scaleCell">
-									{ this.recursiveReturnInnerDiv(innerDivCount) };
-								</div></Col>
-								<Col md={1} xs={2} id="scaleCol8_7" className={"scaleCellRightHalf scaleCol8 noAnimation"}><div className="scaleCell">
-									{ this.recursiveReturnInnerDiv(innerDivCount) };
-								</div></Col>
-							</Row>
-							
+							<RegularRow row={7} ColColors={['', '', '', '', '', '']} darker={true}/>
 						</Grid>
 						<div id="contentBackground">
 							<div id="bottomWaveDarkMargin"></div>
@@ -314,6 +268,7 @@ class ChatBubble extends Component{
 			<div id={this.props.assignId} className="chatBubbleContainer">
 				<div className="chatBubbleText">{this.props.chat}</div>
 				{this.props.showImage && <div className="chatBubbleImage" >
+					<div className="chatBubbleImg"/>
 					<div className="chatBubbleImg"/>
 					<div className="chatBubbleImg"/>
 					<div className="chatBubbleImg"/>

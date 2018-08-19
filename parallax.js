@@ -8,7 +8,7 @@ var gScrollCounter = 0;
 var gLastMousePosition = {};
 var gLastClickPosition = {};
 
-var TOTAL_ROWS = 8;
+var TOTAL_ROWS = 7;
 var scaleElements = [];
 var scaleElementsBottom;
 var pacmanSection;
@@ -49,7 +49,7 @@ export function kickStartAnimateScales(){
 	elBubbles2 = document.getElementById('bubbles2');
 	elBubbles3 = document.getElementById('bubbles3');
 	
-	//document.addEventListener("scroll", detectScrollPosition);
+	/*document.addEventListener("scroll", detectScrollPositionToStartFish);*/
 	document.addEventListener("scroll", firewatchParallax);
 	
 	testEl = document.getElementById('btnHome');
@@ -60,27 +60,7 @@ export function kickStartAnimateScales(){
 }
 
 
-//firewatch
-/*
-window.addEventListener("scroll", function(event){
-
-		var top = this.pageYOffset;
-
-		var layers = document.getElementsByClassName("parallax");
-		var layer, speed, yPos;
-		for (var i = 0; i < layers.length; i++) {
-			layer = layers[i];
-			// 2, 5, 11, 16, 26, 36, 49, 69, 100
-			speed = layer.getAttribute('data-speed');
-			var yPos = -(top * speed / 100);
-			layer.setAttribute('style', 'transform: translate3d(0px, ' + yPos + 'px, 0px)');
-
-		}
-	});
-	*/
-
 var gradientBottomDiv = document.getElementById('bottomWaveDarkMargin');
-//var speeds = [2, 5, 11, 16, 26, 36, 49, 69, 100];
 var speeds = [-26, -16, 11, 16, 26, 36, 49, 69, 100];
 function firewatchParallax(){
 	var top = window.pageYOffset;
@@ -90,7 +70,6 @@ function firewatchParallax(){
 			
 			speed = speeds[i];
 			yPos = -(top * speed / 100);
-			//scaleElements[i][j].style['webkitTransform'] = 'translate3d(0px, ' + yPos + 'px, 0px)';
 			scaleElements[i][j].setAttribute('style', 'transform: translate3d(0px, ' + yPos + 'px, 0px)');
 		}
 	}
@@ -99,7 +78,7 @@ function firewatchParallax(){
 	pacmanSection.setAttribute('style', 'transform: translate3d(0px, ' + -yPos + 'px, 0px)');
 }
 	
-export function detectScrollPosition(event){
+export function detectScrollPositionToStartFish(event){
 	gScrollOffset = window.pageYOffset || window.scrollTop;
 	
 	// TODO: also stop animation if modal is showing
@@ -262,11 +241,9 @@ function buildScaleElements(){
 	for (var i=0; i<TOTAL_ROWS; i++){
 		
 		var elCount = (i % 2 == 0) ? 6 : 7; 
-		//alert('elCount for i = '+elCount);
 		scaleElements[i] = Array();
 		
 		for (var j=0; j<elCount; j++){
-			//alert('scaleCol'+(i+1)+'_'+(j+1));
 			var scaleElement = document.getElementById('scaleCol'+(i+1)+'_'+(j+1));
 			scaleElements[i].push(scaleElement);
 		}
@@ -307,8 +284,6 @@ function getRandom(upper) {
 
 
 function hasClassName(className, searchClassName){
-	//var hasSearchClassName = className.indexOf(searchClassName);
-	//alert(hasSearchClassName);
 	return (className.indexOf(searchClassName)>-1);
 }
 function addClassToString(className, classNameToAdd){

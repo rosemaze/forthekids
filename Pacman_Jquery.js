@@ -1,7 +1,4 @@
 	import { globalShowDialog } from './Pacman';
-	
-	
-	var $ = require ('jquery');
 
 	//// GLOHAL CONSTANTS
 	// Speeds
@@ -328,8 +325,9 @@ function initialiseSprites(){
 	setPacmanDivClassName('stationary-left');
 	
 	// Put pacman back to starting point
-	$("#pacmanDiv").css("left", sprites.pacman.column*WALL_INCREMENT+"px" );
-	$("#pacmanDiv").css("top", sprites.pacman.row*WALL_INCREMENT+"px");
+	var pacmanEl = document.getElementById('pacmanDiv');
+	pacmanEl.style.left = sprites.pacman.column*WALL_INCREMENT+"px";
+	pacmanEl.style.top = sprites.pacman.row*WALL_INCREMENT+"px";
 	
 	// Hide ghosts
 	hideGhost('ghostRedDiv');
@@ -341,15 +339,6 @@ function initialiseSprites(){
 	document.getElementById("dotDiv_175px_205px").className = "ghostBoxDiv3";
 }
 
-/*
-$(function(){
-	buildWalls();
-	insertGhostBox();
-	createLives();
-	
-	resetGame();
-});
-*/
 
 export function kickStartJqueryPacmanGame(){
 	buildWalls();
@@ -543,8 +532,8 @@ function handleKeyDown(event){
 	
 	
 	function buildWalls(){
-		document.getElementById('mapDiv').innerHTML = '';
-		
+		var mapDiv = document.getElementById('mapDiv');
+		mapDiv.innerHTML = '';
 		
 		var builtDiv;
 		var borderMargin = 5; var borderRadius = 7;
@@ -646,7 +635,7 @@ function handleKeyDown(event){
 							break;
 					}
 				}
-				$("#mapDiv").append(builtDiv);
+				mapDiv.appendChild(builtDiv);
 			}
 		}
 	}
@@ -682,7 +671,8 @@ function handleKeyDown(event){
 			sprites.pacman.x = currentX;
 			sprites.pacman.column = currentColumn;
 			
-			$("#"+sprites.pacman.id).css("left", currentX+"px" );
+			var pacmanEl = document.getElementById(sprites.pacman.id);
+			pacmanEl.style.left = currentX+"px";
 			return;
 		}
 	
@@ -713,7 +703,8 @@ function handleKeyDown(event){
 		// Update actual html element and update sprite object properties
 		sprites.pacman.isMoving = movementObj.canMove;
 		if (sprites.pacman.isMoving){
-			$("#"+sprites.pacman.id).css(movementObj.cssPos, movementObj.cssPosVal+"px" );
+			var spriteEl = document.getElementById(sprites.pacman.id);
+			spriteEl.style[movementObj.cssPos] = movementObj.cssPosVal+"px";
 			sprites.pacman.row = movementObj.row;
 			sprites.pacman.column = movementObj.column;
 			sprites.pacman.x = movementObj.x;
@@ -987,7 +978,8 @@ function handleKeyDown(event){
 			spriteObj.x = currentX;
 			spriteObj.column = currentColumn;
 			
-			$("#"+spriteObj.id).css("left", currentX+"px" );
+			var spriteEl = document.getElementById(spriteObj.id);
+			spriteEl.left = currentX + 'px';
 			return;
 		}
 		
@@ -1024,9 +1016,10 @@ function handleKeyDown(event){
 		}
 			
 		// Move ghost div
-		$("#"+spriteObj.id).css(cssPos, cssPosVal+"px" );
+		var spriteEl = document.getElementById(spriteObj.id);
+		spriteEl.style[cssPos] = cssPosVal + 'px';
 		// Remove all direction classes and add current direction class to move eyes
-		$("#"+spriteObj.id).attr("class", "ghost " + spriteObj.behaviour + " " + KEY_NUMBER_TO_WORD[spriteObj.currentDirection]);
+		spriteEl.className = "ghost " + spriteObj.behaviour + " " + KEY_NUMBER_TO_WORD[spriteObj.currentDirection];
 		
 	}
 		
@@ -1477,7 +1470,9 @@ function setWidthOfAdjacentDivsToReadyText(width){
 
 function updateScore(addPoints){
 	gScore+=addPoints;
-	$("#scoreValue").html(gScore);
+	
+	var scoreEl = document.getElementById('scoreValue');
+	scoreEl.innerHTML = gScore;
 	
 	if (gScore >= gNextBonusLifeFlag){
 		// Set bonus life flag to 10,000 points more
@@ -1487,7 +1482,8 @@ function updateScore(addPoints){
 }
 
 function updateLives(lives){
-	$("#livesValue").html(lives);
+	var livesEl = document.getElementById('livesValue');
+	livesEl.innerHTML = lives;
 }
 
 function doPacmanDyingSequence(){
@@ -1510,7 +1506,8 @@ function doPacmanDyingSequence(){
 }
 
 function showStationaryPacman(){
-	var pacmanClass = $('#pacmanDiv').attr('class');
+	var pacmanEl = document.getElementById('pacmanDiv');
+	var pacmanClass = pacmanEl.className;
 	if (pacmanClass.substring(0,11)!='stationary-'){
 		setPacmanDivClassName('stationary-'+pacmanClass);
 	}
@@ -1556,7 +1553,10 @@ function updateStage(stage){
 }
 
 function setWallColour(colourString){
-	$('.wallDiv').css('background-color', colourString);
+	var wallDivs = document.getElementsByClassName('wallDiv')
+	for (var i=0; i<wallDivs.length; i++){
+		wallDivs[i].style.backgroundColor = colourString;
+	}
 }
 
 
@@ -1572,9 +1572,10 @@ function hideAllGhosts(){
 }
 
 function hideGhost(elementId){
-	$('#'+elementId).css("left", sprites.ghostred.column*WALL_INCREMENT+"px" );
-	$('#'+elementId).css("top", sprites.ghostred.row*WALL_INCREMENT+"px");
-	$('#'+elementId).css("display", "none");
+	var ghostEl = document.getElementById(elementId);
+	ghostEl.style.left = sprites.ghostred.column*WALL_INCREMENT+"px";
+	ghostEl.style.top = sprites.ghostred.row*WALL_INCREMENT+"px";
+	ghostEl.style.display = "none";
 }
 
 function everyInterval(n) {
